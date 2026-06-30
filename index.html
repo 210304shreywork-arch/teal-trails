@@ -91,11 +91,11 @@
         }
 
         .bubble-layer {
-            position: absolute;
+            position: fixed;
             inset: 0;
-            overflow: visible;
+            overflow: hidden;
             pointer-events: none;
-            z-index: 25;
+            z-index: 40;
         }
         .bubble {
             position: absolute;
@@ -115,6 +115,9 @@
             5% { opacity: 0.85; }
             70% { opacity: 0.65; }
             100% { transform: translateY(-115vh) scale(0.5); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bubble-layer { display: none; }
         }
 
         .glass {
@@ -298,6 +301,8 @@
 </head>
 <body>
 
+    <div id="bubble-layer" class="bubble-layer" aria-hidden="true"></div>
+
     <!-- Navbar -->
     <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-full px-4 md:px-8 py-3 md:py-4 premium-shadow">
         <div class="grid grid-cols-3 items-center">
@@ -327,20 +332,6 @@
 
     <!-- Hero -->
     <section class="hero pt-20 pb-10">
-        <div class="bubble-layer" aria-hidden="true">
-            <div class="bubble" style="left: 6%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 0s;"></div>
-            <div class="bubble" style="left: 14%; width: 18px; height: 18px; animation-duration: 18s; animation-delay: 2s;"></div>
-            <div class="bubble" style="left: 24%; width: 42px; height: 42px; animation-duration: 12s; animation-delay: 0.5s;"></div>
-            <div class="bubble" style="left: 34%; width: 22px; height: 22px; animation-duration: 16s; animation-delay: 4s;"></div>
-            <div class="bubble" style="left: 44%; width: 34px; height: 34px; animation-duration: 13s; animation-delay: 1s;"></div>
-            <div class="bubble" style="left: 52%; width: 20px; height: 20px; animation-duration: 17s; animation-delay: 3s;"></div>
-            <div class="bubble" style="left: 60%; width: 52px; height: 52px; animation-duration: 11s; animation-delay: 0.2s;"></div>
-            <div class="bubble" style="left: 68%; width: 24px; height: 24px; animation-duration: 15s; animation-delay: 5s;"></div>
-            <div class="bubble" style="left: 76%; width: 38px; height: 38px; animation-duration: 14s; animation-delay: 1.5s;"></div>
-            <div class="bubble" style="left: 84%; width: 26px; height: 26px; animation-duration: 16s; animation-delay: 6s;"></div>
-            <div class="bubble" style="left: 91%; width: 16px; height: 16px; animation-duration: 19s; animation-delay: 2.5s;"></div>
-        </div>
-
         <div class="text-center px-6 relative z-20 flex-1 flex flex-col justify-center max-w-4xl mx-auto">
             <div class="hero-logo-ring">
                 <img src="images/logo.jpg" alt="" class="w-12 h-12 rounded-full object-cover">
@@ -598,6 +589,38 @@
             });
         }
 
+        function initBubbles() {
+            const layer = document.getElementById('bubble-layer');
+            const bubbles = [
+                { left: 4, size: 28, duration: 14, delay: 0 },
+                { left: 11, size: 18, duration: 18, delay: 2 },
+                { left: 18, size: 42, duration: 12, delay: 0.5 },
+                { left: 25, size: 22, duration: 16, delay: 4 },
+                { left: 32, size: 34, duration: 13, delay: 1 },
+                { left: 39, size: 20, duration: 17, delay: 3 },
+                { left: 46, size: 52, duration: 11, delay: 0.2 },
+                { left: 53, size: 24, duration: 15, delay: 5 },
+                { left: 60, size: 38, duration: 14, delay: 1.5 },
+                { left: 67, size: 26, duration: 16, delay: 6 },
+                { left: 74, size: 16, duration: 19, delay: 2.5 },
+                { left: 81, size: 30, duration: 13, delay: 7 },
+                { left: 88, size: 44, duration: 12, delay: 3.5 },
+                { left: 95, size: 14, duration: 20, delay: 8 },
+                { left: 8, size: 36, duration: 15, delay: 9 },
+                { left: 22, size: 20, duration: 18, delay: 10 },
+                { left: 48, size: 48, duration: 10, delay: 11 },
+                { left: 72, size: 22, duration: 17, delay: 12 },
+                { left: 56, size: 32, duration: 14, delay: 13 },
+                { left: 35, size: 18, duration: 21, delay: 14 }
+            ];
+            bubbles.forEach(b => {
+                const el = document.createElement('div');
+                el.className = 'bubble';
+                el.style.cssText = `left:${b.left}%;width:${b.size}px;height:${b.size}px;animation-duration:${b.duration}s;animation-delay:${b.delay}s;`;
+                layer.appendChild(el);
+            });
+        }
+
         function createGallery() {
             const g = document.getElementById('gallery-grid');
             galleryItems.forEach((item, i) => {
@@ -625,6 +648,7 @@
         });
 
         window.onload = () => {
+            initBubbles();
             createMythCards();
             createGallery();
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
