@@ -11,6 +11,7 @@
             --bg: #0e1f1d;
             --accent: #72E8D5;
             --accent-soft: #9ef5ea;
+            --purpose-red: #D17270;
             --text: #ffffff;
             --muted: #c5f5ee;
         }
@@ -32,14 +33,7 @@
         }
 
         body.purpose-page {
-            background-color: var(--bg);
-            background-image:
-                linear-gradient(160deg, rgba(14, 31, 29, 0.5) 0%, rgba(26, 174, 160, 0.22) 45%, rgba(14, 31, 29, 0.55) 100%),
-                url('images/purpose-bg.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            background-color: var(--purpose-red);
         }
 
         .purpose-page-wrap {
@@ -69,15 +63,16 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(114, 232, 213, 0.2);
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .glass-hover:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(114, 232, 213, 0.4);
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.45);
             transform: translateY(-4px);
         }
 
@@ -156,9 +151,7 @@
         }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 768px) {
-            body.purpose-page { background-attachment: scroll; background-position: center 25%; }
-        }
+
     </style>
 </head>
 <body class="purpose-page">
@@ -226,7 +219,7 @@
         </div>
     </section>
 
-    <footer class="relative py-8 px-6 border-t border-[#72E8D5]/10 text-center bg-[#0e1f1d]/40 backdrop-blur-sm">
+    <footer class="relative py-8 px-6 border-t border-white/20 text-center bg-white/10 backdrop-blur-md">
         <p class="text-sm text-[#72E8D5]/40">© Teal Trails 2026 • Made with conviction by students who refuse to stay silent.</p>
         <a href="https://finance4future-website.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs font-light text-white tracking-wide hover:text-[#72E8D5] transition-colors">Website made by Shrey Vajpayee</a>
     </footer>
