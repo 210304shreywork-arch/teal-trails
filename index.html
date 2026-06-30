@@ -90,36 +90,6 @@
                 radial-gradient(circle at 80% 70%, rgba(61, 217, 197, 0.15) 0%, transparent 55%);
         }
 
-        .bubble-layer {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 40;
-        }
-        .bubble {
-            position: absolute;
-            bottom: -20px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.75) 0%, rgba(158, 245, 234, 0.35) 38%, rgba(114, 232, 213, 0.12) 72%);
-            border: 1.5px solid rgba(255, 255, 255, 0.55);
-            animation: floatUp linear infinite;
-            will-change: transform, opacity;
-            box-shadow:
-                inset 0 0 8px rgba(255, 255, 255, 0.35),
-                0 0 16px rgba(255, 255, 255, 0.35),
-                0 0 28px rgba(114, 232, 213, 0.4);
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.85); opacity: 0; }
-            5% { opacity: 0.85; }
-            70% { opacity: 0.65; }
-            100% { transform: translateY(-115vh) scale(0.5); opacity: 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .bubble-layer { display: none; }
-        }
-
         .glass {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(28px);
@@ -300,8 +270,6 @@
     </style>
 </head>
 <body>
-
-    <div id="bubble-layer" class="bubble-layer" aria-hidden="true"></div>
 
     <!-- Navbar -->
     <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-full px-4 md:px-8 py-3 md:py-4 premium-shadow">
@@ -589,38 +557,6 @@
             });
         }
 
-        function initBubbles() {
-            const layer = document.getElementById('bubble-layer');
-            const bubbles = [
-                { left: 4, size: 28, duration: 14, delay: 0 },
-                { left: 11, size: 18, duration: 18, delay: 2 },
-                { left: 18, size: 42, duration: 12, delay: 0.5 },
-                { left: 25, size: 22, duration: 16, delay: 4 },
-                { left: 32, size: 34, duration: 13, delay: 1 },
-                { left: 39, size: 20, duration: 17, delay: 3 },
-                { left: 46, size: 52, duration: 11, delay: 0.2 },
-                { left: 53, size: 24, duration: 15, delay: 5 },
-                { left: 60, size: 38, duration: 14, delay: 1.5 },
-                { left: 67, size: 26, duration: 16, delay: 6 },
-                { left: 74, size: 16, duration: 19, delay: 2.5 },
-                { left: 81, size: 30, duration: 13, delay: 7 },
-                { left: 88, size: 44, duration: 12, delay: 3.5 },
-                { left: 95, size: 14, duration: 20, delay: 8 },
-                { left: 8, size: 36, duration: 15, delay: 9 },
-                { left: 22, size: 20, duration: 18, delay: 10 },
-                { left: 48, size: 48, duration: 10, delay: 11 },
-                { left: 72, size: 22, duration: 17, delay: 12 },
-                { left: 56, size: 32, duration: 14, delay: 13 },
-                { left: 35, size: 18, duration: 21, delay: 14 }
-            ];
-            bubbles.forEach(b => {
-                const el = document.createElement('div');
-                el.className = 'bubble';
-                el.style.cssText = `left:${b.left}%;width:${b.size}px;height:${b.size}px;animation-duration:${b.duration}s;animation-delay:${b.delay}s;`;
-                layer.appendChild(el);
-            });
-        }
-
         function createGallery() {
             const g = document.getElementById('gallery-grid');
             galleryItems.forEach((item, i) => {
@@ -648,7 +584,6 @@
         });
 
         window.onload = () => {
-            initBubbles();
             createMythCards();
             createGallery();
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
