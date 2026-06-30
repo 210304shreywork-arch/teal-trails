@@ -31,22 +31,41 @@
             letter-spacing: -0.04em;
         }
 
-        .faded-bg {
+        body.purpose-page {
+            background-color: var(--bg);
+            background-image:
+                linear-gradient(160deg, rgba(14, 31, 29, 0.78) 0%, rgba(26, 174, 160, 0.32) 45%, rgba(14, 31, 29, 0.85) 100%),
+                url('images/mobile-health-unit.png');
+            background-size: cover;
+            background-position: center 35%;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .purpose-page-wrap {
             position: relative;
             isolation: isolate;
             min-height: 100dvh;
         }
-        .faded-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background-image:
-                linear-gradient(160deg, rgba(14, 31, 29, 0.88) 0%, rgba(26, 174, 160, 0.42) 45%, rgba(14, 31, 29, 0.9) 100%),
-                var(--bg-image);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+
+        .purpose-logo-badge {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            border: 2px solid rgba(114, 232, 213, 0.45);
+            background: rgba(14, 31, 29, 0.45);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 4px;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 0 30px rgba(114, 232, 213, 0.2);
+        }
+
+        .purpose-logo-badge img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .glass {
@@ -138,11 +157,11 @@
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
-            .faded-bg::before { background-attachment: scroll; }
+            body.purpose-page { background-attachment: scroll; background-position: center 25%; }
         }
     </style>
 </head>
-<body>
+<body class="purpose-page">
 
     <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-full px-4 md:px-8 py-3 md:py-4 premium-shadow">
         <div class="grid grid-cols-3 items-center">
@@ -175,10 +194,13 @@
         </div>
     </nav>
 
-    <section id="purpose" class="faded-bg py-28 md:py-32" style="--bg-image: url('images/school-team.jpg');">
+    <section id="purpose" class="purpose-page-wrap py-28 md:py-32">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-12 fade-up">
-                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">About</div>
+                <div class="purpose-logo-badge">
+                    <img src="images/logo.jpg" alt="Teal Trails logo">
+                </div>
+                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">Teal Trails Mobile Health Unit</div>
                 <h1 class="heading-serif text-4xl md:text-5xl text-white">Purpose</h1>
             </div>
 
@@ -204,7 +226,7 @@
         </div>
     </section>
 
-    <footer class="py-8 px-6 border-t border-[#72E8D5]/10 text-center">
+    <footer class="relative py-8 px-6 border-t border-[#72E8D5]/10 text-center bg-[#0e1f1d]/40 backdrop-blur-sm">
         <p class="text-sm text-[#72E8D5]/40">© Teal Trails 2026 • Made with conviction by students who refuse to stay silent.</p>
         <a href="https://finance4future-website.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-block mt-3 text-xs font-light text-white tracking-wide hover:text-[#72E8D5] transition-colors">Website made by Shrey Vajpayee</a>
     </footer>
