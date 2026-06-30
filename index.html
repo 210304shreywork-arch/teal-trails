@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teal Trails • The Cancer That Shouldn't Exist Anymore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap');
+        
+        :root {
+            --teal-dark: #0f4c45;
+            --teal: #145f56;
+            --teal-light: #1a7a6e;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 900;
+            line-height: 1.05;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .premium-shadow {
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .section-header {
+            font-size: 3.25rem;
+            line-height: 1.05;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #5DD3B8;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .instagram-gradient {
+            background: linear-gradient(45deg, #f56040, #c13584, #833ab4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .pamphlet-content {
+            font-family: 'Inter', system_ui, sans-serif;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body class="bg-[#0a1110] text-[#EDE8DF] overflow-x-hidden">
+
+    <!-- Floating Navbar -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-6xl">
+        <div class="glass rounded-3xl px-8 py-5 flex items-center justify-between premium-shadow">
+            <!-- Left Links -->
+            <div class="hidden md:flex items-center gap-x-9 text-sm font-medium tracking-wide">
+                <a href="#story" class="nav-link hover:text-[#5DD3B8]">Our Story</a>
+                <a href="#science" class="nav-link hover:text-[#5DD3B8]">The Science</a>
+                <a href="#pamphlet" class="nav-link hover:text-[#5DD3B8]">Awareness Guide</a>
+            </div>
+
+            <!-- Centered Logo -->
+            <div class="flex items-center justify-center">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-[#5DD3B8] rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-leaf text-[#0a1110] text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-3xl tracking-[-1.5px]">Teal Trails</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side -->
+            <div class="flex items-center gap-x-4">
+                <a href="#get-involved" 
+                   class="hidden md:block px-6 py-3 text-sm font-semibold rounded-3xl border border-white/20 hover:bg-white/5 transition-all">
+                    Get Involved
+                </a>
+                
+                <!-- Instagram Button -->
+                <a href="https://www.instagram.com/teal.trails/" target="_blank"
+                   class="flex items-center gap-x-2.5 px-5 py-3 rounded-3xl bg-white text-[#0a1110] hover:bg-[#f0e9df] transition-all text-sm font-semibold">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                    <span class="hidden sm:inline">Instagram</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-[100dvh] flex items-center justify-center relative pt-20">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-block px-5 py-1.5 rounded-full bg-white/5 text-sm tracking-[3px] mb-6 border border-white/10">
+                INDIA • 2026
+            </div>
+            
+            <h1 class="heading-serif text-[92px] md:text-[120px] leading-[0.92] tracking-[-6.5px] mb-6">
+                The cancer<br>that <span class="text-[#5DD3B8]">shouldn't</span><br>exist anymore.
+            </h1>
+            
+            <p class="max-w-lg mx-auto text-2xl text-[#C3B8A8] mb-12">
+                One Indian woman dies every 8 minutes from cervical cancer.<br>
+                It is almost entirely preventable.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#pamphlet" 
+                   class="group inline-flex items-center justify-center gap-x-3 px-9 py-5 rounded-3xl bg-[#5DD3B8] text-[#0a1110] text-lg font-semibold hover:bg-white transition-all">
+                    Read the Awareness Guide
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#story" 
+                   class="inline-flex items-center justify-center gap-x-3 px-9 py-5 rounded-3xl border border-white/20 hover:bg-white/5 text-lg font-medium transition-all">
+                    Meet the founder
+                </a>
+            </div>
+        </div>
+        
+        <!-- Subtle background gradient -->
+        <div class="absolute inset-0 bg-[radial-gradient(#1a322e_0.8px,transparent_1px)] bg-[length:4px_4px] opacity-40"></div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="border-y border-white/10 py-8">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-y-8">
+            <div class="text-center">
+                <div class="text-6xl font-semibold tracking-tighter text-[#5DD3B8]">77,348</div>
+                <div class="text-[#A89B8A] mt-1">Deaths every year in India</div>
+            </div>
+            <div class="text-center">
+                <div class="text-6xl font-semibold tracking-tighter text-[#5DD3B8]">99.7%</div>
+                <div class="text-[#A89B8A] mt-1">Caused by preventable HPV</div>
+            </div>
+            <div class="text-center">
+                <div class="text-6xl font-semibold tracking-tighter text-[#5DD3B8]">&lt;3%</div>
+                <div class="text-[#A89B8A] mt-1">Women screened regularly</div>
+            </div>
+            <div class="text-center">
+                <div class="text-6xl font-semibold tracking-tighter text-[#5DD3B8]">9–14</div>
+                <div class="text-[#A89B8A] mt-1">Ideal age for vaccination</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Story + Founder -->
+    <section id="story" class="max-w-5xl mx-auto px-6 pt-24 pb-20">
+        <div class="grid md:grid-cols-12 gap-x-16 gap-y-12 items-center">
+            <div class="md:col-span-7">
+                <div class="uppercase tracking-[4px] text-[#5DD3B8] text-sm mb-3">OUR STORY</div>
+                <h2 class="heading-serif text-7xl leading-none tracking-[-3.5px]">We started because<br>silence was killing women.</h2>
+            </div>
+            <div class="md:col-span-5 text-[#C3B8A8] text-[17px] leading-relaxed">
+                Teal Trails began as a student initiative at Oakridge International School. We saw the numbers. We saw the stigma. We decided we would not look away.
+            </div>
+        </div>
+
+        <!-- Founder Section -->
+        <div class="mt-20 pt-16 border-t border-white/10">
+            <div class="max-w-3xl">
+                <div class="flex items-center gap-x-5 mb-8">
+                    <div class="w-20 h-20 bg-[#1f3530] rounded-3xl flex-shrink-0 overflow-hidden border border-white/10">
+                        <!-- Placeholder for founder photo - replace with real image later -->
+                        <div class="w-full h-full bg-gradient-to-br from-[#5DD3B8]/30 to-transparent flex items-center justify-center">
+                            <i class="fa-solid fa-user text-4xl text-[#5DD3B8]/70"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-semibold tracking-tight">Vaibhavi Babu</div>
+                        <div class="text-[#5DD3B8] text-lg">Founder • Oakridge Gachibowli, DP2</div>
+                    </div>
+                </div>
+                
+                <div class="prose prose-invert text-[#C3B8A8] max-w-2xl text-[17px]">
+                    <p>"I created Teal Trails because I couldn't accept that thousands of women in our country die every year from something we can prevent. This isn't just a health issue — it's an issue of access, education, and dignity."</p>
+                    <p class="mt-4">What started as one student's frustration has grown into a movement of students, doctors, and communities working together to make cervical cancer a disease of the past in India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Science -->
+    <section id="science" class="bg-[#111A18] py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="max-w-2xl mb-14">
+                <div class="uppercase tracking-[3px] text-[#5DD3B8] text-sm mb-3">THE SCIENCE</div>
+                <h2 class="heading-serif text-6xl leading-none tracking-[-2.5px]">It develops slowly.<br>It can be stopped.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-5">
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-[#5DD3B8] text-sm tracking-widest mb-4">STAGE 1</div>
+                    <div class="font-semibold text-2xl mb-3">HPV Infection</div>
+                    <p class="text-[#A89B8A]">Most people get it. Most clear it naturally.</p>
+                </div>
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-[#5DD3B8] text-sm tracking-widest mb-4">STAGE 2</div>
+                    <div class="font-semibold text-2xl mb-3">Persistent Infection</div>
+                    <p class="text-[#A89B8A]">High-risk strains (16 &amp; 18) begin damaging cells over years.</p>
+                </div>
+                <div class="glass rounded-3xl p-8">
+                    <div class="text-[#5DD3B8] text-sm tracking-widest mb-4">STAGE 3</div>
+                    <div class="font-semibold text-2xl mb-3">Pre-cancer (CIN)</div>
+                    <p class="text-[#A89B8A]">Detectable and completely treatable at this stage.</p>
+                </div>
+                <div class="glass rounded-3xl p-8 border border-[#5DD3B8]/40">
+                    <div class="text-[#5DD3B8] text-sm tracking-widest mb-4">STAGE 4</div>
+                    <div class="font-semibold text-2xl mb-3">Invasive Cancer</div>
+                    <p class="text-[#A89B8A]">This is where survival rates drop dramatically. This is what we are trying to prevent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dedicated Pamphlet Section -->
+    <section id="pamphlet" class="max-w-5xl mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <div class="uppercase tracking-[3px] text-[#5DD3B8] text-sm mb-2">DEEP DIVE</div>
+                <h2 class="heading-serif text-6xl tracking-[-2.5px]">The Complete<br>Awareness Guide</h2>
+            </div>
+            <a href="#" onclick="window.print()" 
+               class="hidden md:flex items-center gap-x-2 text-sm px-5 py-3 rounded-3xl border border-white/20 hover:bg-white/5">
+                <i class="fa-solid fa-download"></i>
+                <span>Print / Save PDF</span>
+            </a>
+        </div>
+
+        <!-- Beautifully reformatted pamphlet content -->
+        <div class="glass rounded-3xl p-10 md:p-14 text-[#EDE8DF]">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <div class="text-[#5DD3B8] tracking-[4px] text-sm mb-2">TEAL TRAILS INITIATIVE</div>
+                    <div class="text-5xl font-semibold tracking-tight">The Cancer That Shouldn't Exist Anymore</div>
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Key Stats -->
+                    <div>
+                        <div class="uppercase text-xs tracking-widest text-[#5DD3B8] mb-4">THE NUMBERS</div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="border-l-2 border-[#5DD3B8] pl-6">
+                                <div class="text-5xl font-semibold text-[#5DD3B8]">1,23,907</div>
+                                <div class="text-sm mt-1">New cases every year in India</div>
+                            </div>
+                            <div class="border-l-2 border-[#5DD3B8] pl-6">
+                                <div class="text-5xl font-semibold text-[#5DD3B8]">77,348</div>
+                                <div class="text-sm mt-1">Deaths every year in India</div>
+                            </div>
+                            <div class="border-l-2 border-[#5DD3B8] pl-6">
+                                <div class="text-5xl font-semibold text-[#5DD3B8]">#2</div>
+                                <div class="text-sm mt-1">Most common cancer in Indian women</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="uppercase text-xs tracking-widest text-[#5DD3B8] mb-4">THE TRUTH</div>
+                        <p class="text-xl leading-relaxed">Nearly 99.7% of cervical cancers are caused by persistent high-risk HPV infection. This is a slow, detectable, and interruptible process. Every death represents a failure of awareness and access — not inevitability.</p>
+                    </div>
+
+                    <div>
+                        <div class="uppercase text-xs tracking-widest text-[#5DD3B8] mb-4">THREE LAYERS OF DEFENSE</div>
+                        <div class="space-y-6">
+                            <div class="flex gap-6">
+                                <div class="w-9 h-9 rounded-2xl bg-[#5DD3B8] text-[#0a1110] flex-shrink-0 flex items-center justify-center font-bold text-xl">1</div>
+                                <div>
+                                    <div class="font-semibold text-xl mb-1">HPV Vaccination (Primary Prevention)</div>
+                                    <p class="text-[#A89B8A]">Best given between ages 9–14. India's own Cervavac makes this accessible.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="w-9 h-9 rounded-2xl bg-[#5DD3B8] text-[#0a1110] flex-shrink-0 flex items-center justify-center font-bold text-xl">2</div>
+                                <div>
+                                    <div class="font-semibold text-xl mb-1">Screening (Secondary Prevention)</div>
+                                    <p class="text-[#A89B8A]">HPV DNA test every 5 years or Pap smear. Early detection saves lives.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-6">
+                                <div class="w-9 h-9 rounded-2xl bg-[#5DD3B8] text-[#0a1110] flex-shrink-0 flex items-center justify-center font-bold text-xl">3</div>
+                                <div>
+                                    <div class="font-semibold text-xl mb-1">Early Treatment</div>
+                                    <p class="text-[#A89B8A]">Pre-cancerous lesions can be treated with simple outpatient procedures.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section id="get-involved" class="max-w-4xl mx-auto px-6 pb-24 text-center">
+        <div class="glass rounded-3xl p-14">
+            <h2 class="heading-serif text-6xl tracking-[-2px] mb-4">This ends when we decide it ends.</h2>
+            <p class="max-w-md mx-auto text-xl text-[#A89B8A] mb-10">Join us in making cervical cancer a disease of the past in India.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.instagram.com/teal.trails/" target="_blank"
+                   class="px-10 py-4 rounded-3xl bg-[#5DD3B8] text-[#0a1110] font-semibold text-lg flex items-center justify-center gap-x-3 hover:bg-white transition-all">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Follow our journey</span>
+                </a>
+                <a href="#" class="px-10 py-4 rounded-3xl border border-white/20 hover:bg-white/5 font-semibold text-lg transition-all">
+                    Partner with us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-8 text-center text-sm text-[#6B6459]">
+        © Teal Trails 2026 • Made with conviction by students who refuse to stay silent.
+    </footer>
+
+    <script>
+        // Simple smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Subtle navbar hide on scroll (premium feel)
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translate(-50%, -120%)';
+            } else {
+                nav.style.transform = 'translate(-50%, 0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
