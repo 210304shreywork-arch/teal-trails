@@ -257,6 +257,14 @@
             border-top: 1px solid rgba(114, 232, 213, 0.1);
         }
 
+        .about-text-panel {
+            background: rgba(114, 232, 213, 0.12);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(114, 232, 213, 0.2);
+            border-radius: 1rem;
+        }
+
         @media (max-width: 768px) {
             .faded-bg::before { background-attachment: scroll; }
             .hero::before { background-attachment: scroll; }
@@ -335,13 +343,13 @@
     <section id="about" class="faded-bg py-24" style="--bg-image: url('images/camp-consultation-1.jpg');">
         <div class="max-w-5xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-x-16 md:items-stretch">
-                <div class="md:col-span-5 fade-up flex flex-col">
-                    <div class="text-white text-xs tracking-[0.3em] mb-3 uppercase font-semibold">Who We Are</div>
-                    <div class="flex-1 flex items-center">
+                <div class="md:col-span-5 fade-up flex flex-col md:h-full">
+                    <div class="text-[#72E8D5] text-xs tracking-[0.3em] mb-3 uppercase font-semibold">Who We Are</div>
+                    <div class="flex-1 flex items-center md:min-h-0">
                         <h2 class="heading-serif text-4xl md:text-5xl leading-tight text-[#72E8D5]">Born from real conversations across India.</h2>
                     </div>
                 </div>
-                <div class="md:col-span-7 text-white text-lg leading-relaxed mt-10 md:mt-0 space-y-6 fade-up">
+                <div class="md:col-span-7 about-text-panel p-6 md:p-8 text-white text-lg leading-relaxed mt-10 md:mt-0 space-y-6 fade-up">
                     <p>Teal Trails began as a cervical cancer and women's health initiative, rooted in conversations with girls in orphanages, women in rural mandals, and college students in Hyderabad who had never once heard the word "cervix." Over 77,000 women in India lose their lives to cervical cancer every year, not because medicine failed them, but because silence did.</p>
                     <p>The camps taught us something we didn't expect, though. As we went door to door, we kept encountering need that went far beyond what we'd come for, children with infections no one had treated, families without clean water, and much more. We couldn't bring ourselves to look away. So Teal Trails grew alongside us. What started as a cervical cancer initiative has become something larger — a community health movement still close to its roots in women's health, but reaching toward everyone we meet along the way.</p>
                     <p>We're here to break that silence, in classrooms, communities, and at doorsteps, because every person deserves to be heard, informed, and cared for.</p>
