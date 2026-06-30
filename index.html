@@ -200,15 +200,6 @@
         }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        .myth-card {
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-        .myth-card.flipped { transform: rotateY(180deg); }
-        .myth-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .myth-back { transform: rotateY(180deg); }
-
         .quote-bar {
             width: 94%; max-width: 80rem;
             height: 2.5rem; margin: 0 auto;
@@ -278,7 +269,7 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#work" class="nav-link">Our Work</a>
                 <a href="#impact" class="nav-link">Impact</a>
-                <a href="#myths" class="nav-link">Myth vs Fact</a>
+                <a href="#press" class="nav-link">Press</a>
                 <a href="#story" class="nav-link">Our Story</a>
                 <a href="#gallery" class="nav-link">Gallery</a>
             </div>
@@ -441,15 +432,13 @@
         </div>
     </section>
 
-    <!-- Myth vs Fact -->
-    <section id="myths" class="faded-bg py-24" style="--bg-image: url('images/ambulance-interior.jpg');">
+    <!-- Press -->
+    <section id="press" class="faded-bg py-24" style="--bg-image: url('images/ambulance-interior.jpg');">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
-                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">Knowledge Is Power</div>
-                <h2 class="heading-serif text-4xl md:text-5xl text-white">Myth vs Fact</h2>
-                <p class="text-[#c5f5ee]/60 mt-2 text-sm">Tap any card to reveal the truth</p>
+            <div class="text-center fade-up">
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">PRESS</h2>
+                <p class="text-[#c5f5ee]/70 text-lg mt-6 italic">To be announced.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-6" id="myth-grid"></div>
         </div>
     </section>
 
@@ -515,13 +504,6 @@
     </footer>
 
     <script>
-        const myths = [
-            { myth: "HPV vaccine is only for sexually active people.", fact: "The vaccine works best when given before exposure — ideally between ages 9–14." },
-            { myth: "Only women with multiple partners get cervical cancer.", fact: "HPV can be transmitted through any sexual contact." },
-            { myth: "The HPV vaccine promotes promiscuity.", fact: "Large studies found zero link between the vaccine and sexual activity." },
-            { myth: "If there are no symptoms, you're fine.", fact: "Pre-cancer and early cervical cancer are almost always asymptomatic." }
-        ];
-
         const galleryItems = [
             { src: 'images/school-team.jpg', caption: 'With students at a school visit' },
             { src: 'images/team-van.jpeg', caption: 'Our team at the mobile health centre' },
@@ -533,29 +515,6 @@
             { src: 'images/ambulance-interior.jpg', caption: 'Inside the mobile clinic' },
             { src: 'images/camp-consultation-1.jpg', caption: 'Youth health consultation' }
         ];
-
-        function createMythCards() {
-            const c = document.getElementById('myth-grid');
-            c.innerHTML = '';
-            myths.forEach((item, i) => {
-                const card = document.createElement('div');
-                card.className = 'myth-card glass rounded-2xl h-64 relative premium-shadow fade-up';
-                card.style.transitionDelay = `${i * 100}ms`;
-                card.innerHTML = `
-                    <div class="myth-face absolute inset-0 p-8 flex flex-col">
-                        <div class="text-red-400 text-xs tracking-widest font-semibold mb-3">MYTH</div>
-                        <p class="text-base leading-tight text-white">${item.myth}</p>
-                        <div class="mt-auto text-xs text-white/30">Tap to reveal fact</div>
-                    </div>
-                    <div class="myth-face myth-back absolute inset-0 p-8 flex flex-col bg-[#1aaea0]/65 rounded-2xl backdrop-blur-sm">
-                        <div class="text-[#72E8D5] text-xs tracking-widest font-semibold mb-3">FACT</div>
-                        <p class="text-base leading-tight text-white">${item.fact}</p>
-                        <div class="mt-auto text-xs text-[#72E8D5]/60">Tap to flip back</div>
-                    </div>`;
-                card.onclick = () => card.classList.toggle('flipped');
-                c.appendChild(card);
-            });
-        }
 
         function createGallery() {
             const g = document.getElementById('gallery-grid');
@@ -584,7 +543,6 @@
         });
 
         window.onload = () => {
-            createMythCards();
             createGallery();
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         };
