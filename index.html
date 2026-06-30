@@ -57,6 +57,48 @@
             transform: rotateY(180deg);
         }
 
+        .quote-bar {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(4, 47, 46, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .quote-track {
+            display: flex;
+            width: max-content;
+            animation: quote-marquee 45s linear infinite;
+        }
+
+        .quote-track:hover {
+            animation-play-state: paused;
+        }
+
+        .quote-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0 2.5rem;
+            white-space: nowrap;
+            font-size: 0.8125rem;
+            letter-spacing: 0.02em;
+            color: #C3B8A8;
+        }
+
+        .quote-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #5eead4;
+            flex-shrink: 0;
+        }
+
+        @keyframes quote-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3.25rem !important;
@@ -109,6 +151,33 @@
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#impact" class="px-10 py-5 rounded-3xl bg-[#5eead4] text-[#042f2e] font-semibold text-lg hover:bg-white transition-all">See the Impact</a>
                 <a href="#get-involved" class="px-10 py-5 rounded-3xl border border-white/20 font-semibold text-lg hover:bg-white/5 transition-all">Get Involved</a>
+            </div>
+        </div>
+
+        <!-- Looping quote bar -->
+        <div class="quote-bar absolute bottom-0 left-0 right-0 py-3">
+            <div class="quote-track" aria-hidden="true">
+                <span class="quote-item"><span class="quote-dot"></span>Healthcare is a right, not a privilege.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Every woman deserves access to screening and prevention.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Silence around women's health costs lives.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Prevention is power.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Your body. Your right to know.</span>
+                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives — period.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Awareness today prevents tragedy tomorrow.</span>
+                <span class="quote-item"><span class="quote-dot"></span>No woman should die from a preventable cancer.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Breaking stigma is the first step to saving lives.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Early vaccination protects futures.</span>
+                <!-- duplicate for seamless loop -->
+                <span class="quote-item"><span class="quote-dot"></span>Healthcare is a right, not a privilege.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Every woman deserves access to screening and prevention.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Silence around women's health costs lives.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Prevention is power.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Your body. Your right to know.</span>
+                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives — period.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Awareness today prevents tragedy tomorrow.</span>
+                <span class="quote-item"><span class="quote-dot"></span>No woman should die from a preventable cancer.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Breaking stigma is the first step to saving lives.</span>
+                <span class="quote-item"><span class="quote-dot"></span>Early vaccination protects futures.</span>
             </div>
         </div>
     </section>
