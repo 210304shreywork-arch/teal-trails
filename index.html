@@ -122,6 +122,39 @@
         .nav-link:hover { color: var(--accent); }
         .nav-link:hover::after { width: 100%; }
 
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+            min-width: 9rem;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            background: rgba(14, 31, 29, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(114, 232, 213, 0.18);
+            box-shadow: 0 20px 50px -12px rgb(0 0 0 / 0.45);
+        }
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .nav-dropdown-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 0.5rem;
+            transition: color 0.2s, background 0.2s;
+        }
+        .nav-dropdown-item:hover { color: var(--accent); background: rgba(114, 232, 213, 0.08); }
+
         .premium-shadow { box-shadow: 0 35px 80px -15px rgb(0 0 0 / 0.5); }
 
         .hero-logo-ring {
@@ -279,7 +312,13 @@
     <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-full px-4 md:px-8 py-3 md:py-4 premium-shadow">
         <div class="grid grid-cols-3 items-center">
             <div class="hidden lg:flex items-center gap-x-6 text-sm font-medium text-white/80">
-                <a href="#about" class="nav-link">About</a>
+                <div class="nav-dropdown">
+                    <a href="#about" class="nav-link">About Us</a>
+                    <div class="nav-dropdown-menu">
+                        <a href="#purpose" class="nav-dropdown-item">Purpose</a>
+                        <a href="#importance" class="nav-dropdown-item">Importance</a>
+                    </div>
+                </div>
                 <a href="#work" class="nav-link">Our Work</a>
                 <a href="#impact" class="nav-link">Impact</a>
                 <a href="#press" class="nav-link">Press</a>
@@ -353,6 +392,62 @@
                     <p>Teal Trails began as a cervical cancer and women's health initiative, rooted in conversations with girls in orphanages, women in rural mandals, and college students in Hyderabad who had never once heard the word "cervix." Over 77,000 women in India lose their lives to cervical cancer every year, not because medicine failed them, but because silence did.</p>
                     <p>The camps taught us something we didn't expect, though. As we went door to door, we kept encountering need that went far beyond what we'd come for, children with infections no one had treated, families without clean water, and much more. We couldn't bring ourselves to look away. So Teal Trails grew alongside us. What started as a cervical cancer initiative has become something larger — a community health movement still close to its roots in women's health, but reaching toward everyone we meet along the way.</p>
                     <p>We're here to break that silence, in classrooms, communities, and at doorsteps, because every person deserves to be heard, informed, and cared for.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance Stats -->
+    <section class="faded-bg py-16 md:py-20" style="--bg-image: url('images/camp-consultation-1.jpg');">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 premium-shadow fade-up text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-[#72E8D5] mb-3">3.9%</div>
+                    <p class="text-[#c5f5ee]/80 text-sm leading-relaxed">Only of rural women aged 30–49 in Telangana have ever been screened for cervical cancer, a disease that's almost entirely preventable.</p>
+                </div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 premium-shadow fade-up text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-[#72E8D5] mb-3">64%</div>
+                    <p class="text-[#c5f5ee]/80 text-sm leading-relaxed">Rural women across India are 64% more likely than urban women to rely on unhygienic menstrual practices, often simply because sanitary products and private toilets aren't within reach.</p>
+                </div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 premium-shadow fade-up text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-[#72E8D5] mb-3">57.6%</div>
+                    <p class="text-[#c5f5ee]/80 text-sm leading-relaxed">Of women aged 15–49 in Telangana are anemic. Prevalence rose from 53.1% to 57.6% between NFHS-4 and NFHS-5.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Purpose -->
+    <section id="purpose" class="faded-bg py-24" style="--bg-image: url('images/school-team.jpg');">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-12 fade-up">
+                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">About Us</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Purpose</h2>
+            </div>
+            <div class="glass rounded-2xl p-8 md:p-12 premium-shadow fade-up space-y-6 text-[#c5f5ee]/90 text-lg leading-relaxed">
+                <p>Teal Trails started with a few girls I met in an orphanage, girls who'd tested positive for HPV and cervical cancer, and had been isolated because of it. When I asked what would happen to them, the answer I got was, "What can you even do in such situations?" That stayed with me.</p>
+                <p>The more I looked into it, the more the problem widened. What began as a question about cervical cancer led me to deeper, everyday struggles around menstrual health in my own community — labour workers using pieces of cloth as pads, and countless silences around periods that nobody spoke about. Women's health, I realized, wasn't lacking in just one place, it was lacking in so many places where systems had gone unquestioned.</p>
+                <p>That's the root of Teal Trails — real girls and women whose stories deserved more than "what can you even do."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance -->
+    <section id="importance" class="faded-bg py-24" style="--bg-image: url('images/ambulance-interior.jpg');">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-12 fade-up">
+                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">About Us</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Importance</h2>
+            </div>
+            <div class="grid md:grid-cols-1 gap-6">
+                <div class="glass glass-hover rounded-2xl p-8 premium-shadow fade-up">
+                    <p class="text-[#c5f5ee]/90 text-lg leading-relaxed">Only <span class="text-[#72E8D5] font-semibold">3.9%</span> of rural women aged 30–49 in Telangana have ever been screened for cervical cancer, a disease that's almost entirely preventable.</p>
+                </div>
+                <div class="glass glass-hover rounded-2xl p-8 premium-shadow fade-up">
+                    <p class="text-[#c5f5ee]/90 text-lg leading-relaxed">Rural women across India are <span class="text-[#72E8D5] font-semibold">64% more likely</span> than urban women to rely on unhygienic menstrual practices, often simply because sanitary products and private toilets aren't within reach.</p>
+                </div>
+                <div class="glass glass-hover rounded-2xl p-8 premium-shadow fade-up">
+                    <p class="text-[#c5f5ee]/90 text-lg leading-relaxed">Over half of women aged 15–49 in Telangana are anemic. Prevalence rose from <span class="text-[#72E8D5] font-semibold">53.1% to 57.6%</span> between NFHS-4 and NFHS-5.</p>
                 </div>
             </div>
         </div>
