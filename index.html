@@ -7,10 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
 
-        body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
-        .heading-serif { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; letter-spacing: -0.04em; }
+        body { font-family: system-ui, sans-serif; scroll-behavior: smooth; }
+
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+        }
 
         .layered-bg {
             background:
@@ -24,12 +29,6 @@
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .glass-hover:hover {
-            background: rgba(255, 255, 255, 0.09);
-            transform: translateY(-3px);
         }
 
         .nav-glass {
@@ -39,38 +38,16 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .myth-card {
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             transform-style: preserve-3d;
             cursor: pointer;
         }
+
         .myth-card.flipped { transform: rotateY(180deg); }
 
         .myth-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .myth-back { transform: rotateY(180deg); }
-
-        .gallery-item {
-            overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .gallery-item:hover { transform: scale(1.03); }
-        .gallery-item img { transition: transform 0.6s ease; }
-        .gallery-item:hover img { transform: scale(1.08); }
-
-        .gallery-overlay { opacity: 0; transition: opacity 0.4s ease; }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-
-        .initiative-img { height: 150px; object-fit: cover; }
 
         @media (max-width: 768px) {
             .hero-title { font-size: 3.25rem !important; letter-spacing: -3px !important; }
@@ -79,27 +56,26 @@
 </head>
 <body class="bg-[#042f2e] text-[#EDE8DF]">
 
-    <!-- Floating Navbar -->
-    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-7xl nav-glass rounded-3xl px-4 md:px-8 py-4 md:py-5">
+    <!-- Navbar -->
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-3xl px-4 md:px-8 py-4 md:py-5">
         <div class="grid grid-cols-3 items-center">
             <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#about" class="hover:text-[#5eead4] transition-colors">About</a>
                 <a href="#impact" class="hover:text-[#5eead4] transition-colors">Impact</a>
                 <a href="#myths" class="hover:text-[#5eead4] transition-colors">Myth vs Fact</a>
-                <a href="#gallery" class="hover:text-[#5eead4] transition-colors">Our Story</a>
             </div>
 
             <div class="md:col-start-2 flex items-center justify-center gap-x-3">
-                <div class="w-11 h-11 rounded-2xl overflow-hidden border border-white/20 flex-shrink-0">
-                    <img src="https://teal-trails-interact-frnj.bolt.host/logo.png"
-                         alt="Teal Trails" class="w-full h-full object-cover"
-                         onerror="this.outerHTML='<div class=\'w-11 h-11 bg-[#0f766e] flex items-center justify-center\'><i class=\'fa-solid fa-heart-pulse text-white text-3xl\'></i></div>'">
+                <div class="w-10 h-10 rounded-2xl bg-[#0f766e] flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-heart-pulse text-white text-2xl"></i>
                 </div>
                 <span class="font-semibold text-2xl md:text-3xl tracking-[-1.5px]">Teal Trails</span>
             </div>
 
             <div class="flex items-center justify-end gap-x-2 md:gap-x-3">
-                <a href="#get-involved" class="hidden md:block px-6 py-3 text-sm font-semibold rounded-3xl border border-white/20 hover:bg-white/5 transition-all">Get Involved</a>
+                <a href="#get-involved" class="hidden md:block px-6 py-3 text-sm font-semibold rounded-3xl border border-white/20 hover:bg-white/5 transition-all">
+                    Get Involved
+                </a>
                 <a href="https://www.instagram.com/teal.trails/" target="_blank" rel="noopener"
                    class="flex items-center gap-x-2 px-4 md:px-6 py-2.5 md:py-3 rounded-3xl bg-gradient-to-r from-[#f56040] via-[#c13584] to-[#833ab4] text-white text-sm font-semibold">
                     <i class="fa-brands fa-instagram"></i>
@@ -109,19 +85,14 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- Hero -->
     <section class="min-h-[100dvh] flex items-center justify-center relative pt-16 layered-bg">
-        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-            <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-full glass mb-8 text-sm tracking-[2.5px]">
-                <div class="w-2 h-2 bg-[#5eead4] rounded-full animate-pulse"></div>
-                STUDENT-LED • INDIA
-            </div>
-
-            <h1 class="heading-serif hero-title text-[110px] md:text-[140px] leading-[0.86] tracking-[-7.5px] mb-6">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h1 class="heading-serif hero-title text-[110px] md:text-[140px] leading-none tracking-[-7px] mb-6">
                 Change starts<br>with <span class="text-[#5eead4]">awareness</span>.
             </h1>
 
-            <p class="max-w-2xl mx-auto text-xl md:text-2xl text-[#C3B8A8] mb-12">We are students fighting to make women's healthcare accessible in India.</p>
+            <p class="max-w-2xl mx-auto text-xl md:text-2xl text-[#C3B8A8] mb-10">We are students fighting to make women's healthcare accessible in India.</p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#impact" class="px-10 py-5 rounded-3xl bg-[#5eead4] text-[#042f2e] font-semibold text-lg hover:bg-white transition-all">See the Impact</a>
@@ -139,9 +110,8 @@
                     <h2 class="heading-serif text-5xl md:text-6xl leading-none tracking-[-2.5px]">Students who believe change begins with one conversation.</h2>
                 </div>
             </div>
-            <div class="md:col-span-7 text-[#C3B8A8] text-lg leading-relaxed mt-10 md:mt-0 space-y-6 fade-up">
-                <p>Teal Trails is a student-run initiative dedicated to improving access, awareness, and understanding of women's healthcare in India — with a strong focus on cervical cancer prevention and breaking stigma.</p>
-                <p>We believe healthcare should never be a challenge to pursue. It should reach every woman, regardless of where she lives or what she earns.</p>
+            <div class="md:col-span-7 text-[#C3B8A8] text-lg leading-relaxed mt-10 md:mt-0">
+                Teal Trails is a student-run initiative dedicated to improving access, awareness, and understanding of women's healthcare in India — with a strong focus on cervical cancer prevention and breaking stigma.
             </div>
         </div>
     </section>
@@ -149,25 +119,25 @@
     <!-- Impact -->
     <section id="impact" class="layered-bg py-20">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
+            <div class="text-center mb-12">
                 <div class="text-[#5eead4] text-sm tracking-[3px]">THE REALITY</div>
                 <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Why This Matters</h2>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center fade-up">
+                <div class="glass rounded-3xl p-6 md:p-8 text-center">
                     <div class="text-5xl md:text-6xl font-bold text-[#5eead4]">9 min</div>
                     <div class="mt-2 text-[#A89B8A] text-sm md:text-base">A woman dies every 9 minutes in India from cervical cancer</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center fade-up">
+                <div class="glass rounded-3xl p-6 md:p-8 text-center">
                     <div class="text-5xl md:text-6xl font-bold text-[#5eead4]">99%</div>
                     <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Of cases caused by preventable HPV</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center fade-up">
+                <div class="glass rounded-3xl p-6 md:p-8 text-center">
                     <div class="text-5xl md:text-6xl font-bold text-[#5eead4]">#2</div>
                     <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Most common cancer in Indian women</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center fade-up">
+                <div class="glass rounded-3xl p-6 md:p-8 text-center">
                     <div class="text-5xl md:text-6xl font-bold text-[#5eead4]">100%</div>
                     <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Preventable with vaccination &amp; screening</div>
                 </div>
@@ -178,7 +148,7 @@
     <!-- Myth vs Fact -->
     <section id="myths" class="py-20">
         <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
+            <div class="text-center mb-12">
                 <div class="text-[#5eead4] text-sm tracking-[3px]">KNOWLEDGE IS POWER</div>
                 <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Myth vs Fact</h2>
                 <p class="text-[#A89B8A] mt-2">Tap any card to reveal the truth</p>
@@ -187,148 +157,11 @@
         </div>
     </section>
 
-    <!-- Gallery / Our Story -->
-    <section id="gallery" class="layered-bg py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
-                <div class="text-[#5eead4] text-sm tracking-[3px]">IN THE FIELD</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Our Story</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-14 fade-up">
-                <div>
-                    <p class="text-[#C3B8A8] text-lg leading-relaxed mb-6">Teal Trails began as a student initiative at Oakridge International School. We saw the numbers. We saw the stigma. We decided we would not look away.</p>
-                    <p class="text-[#C3B8A8] text-lg leading-relaxed">What started as one student's frustration has grown into a movement of students, doctors, and communities working together to make cervical cancer a disease of the past in India.</p>
-                </div>
-                <div class="glass rounded-3xl p-8">
-                    <div class="flex items-center gap-x-5 mb-6">
-                        <div class="w-20 h-20 bg-[#0f766e] rounded-3xl flex-shrink-0 flex items-center justify-center border border-white/10">
-                            <i class="fa-solid fa-user text-4xl text-[#5eead4]/70"></i>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-semibold">Vaibhavi Babu</div>
-                            <div class="text-[#5eead4]">Founder • Oakridge Gachibowli, DP2</div>
-                        </div>
-                    </div>
-                    <p class="text-[#C3B8A8] italic leading-relaxed">"I created Teal Trails because I couldn't accept that thousands of women in our country die every year from something we can prevent."</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid"></div>
-        </div>
-    </section>
-
-    <!-- Our Work -->
-    <section id="work" class="py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
-                <div class="text-[#5eead4] text-sm tracking-[3px]">WHAT WE DO</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Our Work</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass glass-hover rounded-3xl overflow-hidden fade-up">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" alt="School awareness" class="w-full initiative-img">
-                    <div class="p-7">
-                        <div class="text-[#5eead4] mb-4"><i class="fa-solid fa-school text-3xl"></i></div>
-                        <h3 class="font-semibold text-xl mb-2">School Awareness Campaigns</h3>
-                        <p class="text-[#A89B8A] text-sm">Interactive sessions educating young girls and boys about cervical cancer, HPV, and early vaccination.</p>
-                    </div>
-                </div>
-                <div class="glass glass-hover rounded-3xl overflow-hidden fade-up">
-                    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=600&q=80" alt="Vaccination drive" class="w-full initiative-img">
-                    <div class="p-7">
-                        <div class="text-[#5eead4] mb-4"><i class="fa-solid fa-syringe text-3xl"></i></div>
-                        <h3 class="font-semibold text-xl mb-2">HPV Vaccination Drives</h3>
-                        <p class="text-[#A89B8A] text-sm">On-ground camps delivering free and subsidized HPV vaccines to communities that need them most.</p>
-                    </div>
-                </div>
-                <div class="glass glass-hover rounded-3xl overflow-hidden fade-up">
-                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15f5a9519?auto=format&fit=crop&w=600&q=80" alt="Mobile health camp" class="w-full initiative-img">
-                    <div class="p-7">
-                        <div class="text-[#5eead4] mb-4"><i class="fa-solid fa-ambulance text-3xl"></i></div>
-                        <h3 class="font-semibold text-xl mb-2">Mobile Health Camps</h3>
-                        <p class="text-[#A89B8A] text-sm">Bringing screening, awareness, and early detection directly to underserved areas across India.</p>
-                    </div>
-                </div>
-                <div class="glass glass-hover rounded-3xl overflow-hidden fade-up">
-                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="Breaking stigma" class="w-full initiative-img">
-                    <div class="p-7">
-                        <div class="text-[#5eead4] mb-4"><i class="fa-solid fa-comments text-3xl"></i></div>
-                        <h3 class="font-semibold text-xl mb-2">Breaking the Stigma</h3>
-                        <p class="text-[#A89B8A] text-sm">Creating safe spaces for honest conversations about women's health through community dialogue.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pamphlet -->
-    <section id="guide" class="max-w-5xl mx-auto px-6 pb-24">
-        <div class="text-center mb-10 fade-up">
-            <div class="text-[#5eead4] text-sm tracking-[3px]">DEEP DIVE</div>
-            <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">The Complete Awareness Guide</h2>
-        </div>
-        <div class="glass rounded-3xl p-10 md:p-14 fade-up">
-            <div class="max-w-3xl mx-auto">
-                <h3 class="font-semibold text-2xl md:text-3xl mb-4">How Cervical Cancer Develops</h3>
-                <p class="text-[#A89B8A] text-lg mb-10 leading-relaxed">Nearly 99.7% of cervical cancers are caused by persistent high-risk HPV infection. This is a slow, detectable, and interruptible process. Every death represents a failure of awareness and access — not inevitability.</p>
-
-                <div class="grid md:grid-cols-2 gap-6 mb-10">
-                    <div class="glass rounded-2xl p-6">
-                        <div class="text-[#5eead4] text-sm tracking-widest mb-1">STAGE 1</div>
-                        <div class="font-semibold text-xl mb-2">HPV Infection</div>
-                        <p class="text-sm text-[#A89B8A]">Most infections clear naturally. Persistent high-risk types begin damaging cells over years.</p>
-                    </div>
-                    <div class="glass rounded-2xl p-6">
-                        <div class="text-[#5eead4] text-sm tracking-widest mb-1">STAGE 2</div>
-                        <div class="font-semibold text-xl mb-2">Pre-cancer (CIN)</div>
-                        <p class="text-sm text-[#A89B8A]">Detectable through screening. Fully treatable with cryotherapy or LEEP.</p>
-                    </div>
-                </div>
-
-                <div class="mb-10">
-                    <div class="text-[#5eead4] text-sm tracking-[3px] mb-4">THREE LAYERS OF DEFENSE</div>
-                    <div class="space-y-4">
-                        <div class="flex gap-4 items-start">
-                            <div class="w-8 h-8 rounded-xl bg-[#5eead4] text-[#042f2e] flex items-center justify-center font-bold flex-shrink-0">1</div>
-                            <div>
-                                <div class="font-semibold">HPV Vaccination</div>
-                                <p class="text-[#A89B8A] text-sm">Best given between ages 9–14. India's Cervavac makes this accessible.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-8 h-8 rounded-xl bg-[#5eead4] text-[#042f2e] flex items-center justify-center font-bold flex-shrink-0">2</div>
-                            <div>
-                                <div class="font-semibold">Screening</div>
-                                <p class="text-[#A89B8A] text-sm">HPV DNA test every 5 years or Pap smear. Early detection saves lives.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-8 h-8 rounded-xl bg-[#5eead4] text-[#042f2e] flex items-center justify-center font-bold flex-shrink-0">3</div>
-                            <div>
-                                <div class="font-semibold">Early Treatment</div>
-                                <p class="text-[#A89B8A] text-sm">Pre-cancerous lesions can be treated with simple outpatient procedures.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button onclick="window.print()" class="inline-flex items-center gap-x-2 text-sm px-6 py-3 rounded-3xl border border-white/20 hover:bg-white/5 transition-all">
-                        <i class="fa-solid fa-download"></i>
-                        Print / Save PDF
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Get Involved -->
     <section id="get-involved" class="max-w-4xl mx-auto px-6 py-20 text-center">
-        <div class="glass rounded-3xl p-10 md:p-14 fade-up">
+        <div class="glass rounded-3xl p-10 md:p-14">
             <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2px] mb-4">Be part of the change.</h2>
-            <p class="text-[#A89B8A] text-lg mb-8 max-w-md mx-auto">Whether you volunteer, partner with us, or spread the word — you are part of this trail.</p>
+            <p class="text-[#A89B8A] text-lg mb-8">Join us in making cervical cancer a disease of the past in India.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://www.instagram.com/teal.trails/" target="_blank" rel="noopener"
                    class="px-9 py-4 rounded-3xl bg-[#5eead4] text-[#042f2e] font-semibold hover:bg-white transition-all">Follow on Instagram</a>
@@ -342,28 +175,20 @@
     </footer>
 
     <script>
-        const myths = [
-            { myth: "HPV vaccine is only for sexually active people.", fact: "The vaccine works best when given before exposure — ideally between ages 9–14." },
-            { myth: "Only women with multiple partners get cervical cancer.", fact: "HPV can be transmitted through any sexual contact. Monogamous women can also get it." },
-            { myth: "The HPV vaccine promotes promiscuity.", fact: "Large studies found zero link between the vaccine and increased sexual activity." },
-            { myth: "If there are no symptoms, you're fine.", fact: "Pre-cancer and early cervical cancer are almost always asymptomatic." }
-        ];
-
-        const galleryItems = [
-            { src: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80', caption: 'Community outreach' },
-            { src: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80', caption: 'School awareness drive' },
-            { src: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=800&q=80', caption: 'Vaccination camp' },
-            { src: 'https://images.unsplash.com/photo-1579684385127-1ef15f5a9519?auto=format&fit=crop&w=800&q=80', caption: 'Mobile health camp' },
-            { src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80', caption: 'Student team' },
-            { src: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80', caption: 'Myth busting session' }
-        ];
-
         function createMythCards() {
             const container = document.getElementById('myth-grid');
+            const myths = [
+                { myth: "HPV vaccine is only for sexually active people.", fact: "The vaccine works best when given before exposure — ideally between ages 9–14." },
+                { myth: "Only women with multiple partners get cervical cancer.", fact: "HPV can be transmitted through any sexual contact." },
+                { myth: "The HPV vaccine promotes promiscuity.", fact: "Large studies found zero link between the vaccine and sexual activity." },
+                { myth: "If there are no symptoms, you're fine.", fact: "Pre-cancer and early cervical cancer are almost always asymptomatic." }
+            ];
+
             container.innerHTML = '';
+
             myths.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'myth-card glass rounded-3xl h-64 relative fade-up';
+                card.className = 'myth-card glass rounded-3xl h-64 relative';
                 card.innerHTML = `
                     <div class="myth-face absolute inset-0 p-8 flex flex-col">
                         <div class="text-red-400 text-xs tracking-widest font-semibold mb-3">MYTH</div>
@@ -381,31 +206,6 @@
             });
         }
 
-        function createGallery() {
-            const grid = document.getElementById('gallery-grid');
-            galleryItems.forEach(item => {
-                const el = document.createElement('div');
-                el.className = 'gallery-item rounded-2xl relative aspect-[4/3] fade-up';
-                el.innerHTML = `
-                    <img src="${item.src}" alt="${item.caption}" class="w-full h-full object-cover rounded-2xl" loading="lazy">
-                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-[#042f2e]/80 to-transparent rounded-2xl flex items-end p-4">
-                        <span class="text-sm font-medium">${item.caption}</span>
-                    </div>
-                `;
-                grid.appendChild(el);
-            });
-        }
-
-        function initAnimations() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.2 });
-
-            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-        }
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', e => {
                 const target = document.querySelector(anchor.getAttribute('href'));
@@ -416,13 +216,7 @@
             });
         });
 
-        function init() {
-            createMythCards();
-            createGallery();
-            initAnimations();
-        }
-
-        window.onload = init;
+        window.onload = createMythCards;
     </script>
 </body>
 </html>
