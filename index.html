@@ -65,7 +65,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: clip;
         }
         .hero::before {
             content: '';
@@ -89,18 +90,31 @@
                 radial-gradient(circle at 80% 70%, rgba(61, 217, 197, 0.15) 0%, transparent 55%);
         }
 
+        .bubble-layer {
+            position: absolute;
+            inset: 0;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 25;
+        }
         .bubble {
             position: absolute;
-            bottom: -60px;
-            background: rgba(255, 255, 255, 0.25);
+            bottom: -20px;
             border-radius: 50%;
+            background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.75) 0%, rgba(158, 245, 234, 0.35) 38%, rgba(114, 232, 213, 0.12) 72%);
+            border: 1.5px solid rgba(255, 255, 255, 0.55);
             animation: floatUp linear infinite;
-            will-change: transform;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+            will-change: transform, opacity;
+            box-shadow:
+                inset 0 0 8px rgba(255, 255, 255, 0.35),
+                0 0 16px rgba(255, 255, 255, 0.35),
+                0 0 28px rgba(114, 232, 213, 0.4);
         }
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.15; }
-            100% { transform: translateY(-120vh) scale(0.6); opacity: 0; }
+            0% { transform: translateY(0) scale(0.85); opacity: 0; }
+            5% { opacity: 0.85; }
+            70% { opacity: 0.65; }
+            100% { transform: translateY(-115vh) scale(0.5); opacity: 0; }
         }
 
         .glass {
@@ -313,16 +327,21 @@
 
     <!-- Hero -->
     <section class="hero pt-20 pb-10">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-            <div class="bubble" style="left: 12%; width: 18px; height: 18px; animation-duration: 22s; animation-delay: 0s; opacity: 0.12;"></div>
-            <div class="bubble" style="left: 28%; width: 32px; height: 32px; animation-duration: 18s; animation-delay: 3s; opacity: 0.08;"></div>
-            <div class="bubble" style="left: 45%; width: 24px; height: 24px; animation-duration: 25s; animation-delay: 7s; opacity: 0.15;"></div>
-            <div class="bubble" style="left: 62%; width: 40px; height: 40px; animation-duration: 16s; animation-delay: 2s; opacity: 0.07;"></div>
-            <div class="bubble" style="left: 75%; width: 20px; height: 20px; animation-duration: 20s; animation-delay: 11s; opacity: 0.13;"></div>
-            <div class="bubble" style="left: 85%; width: 28px; height: 28px; animation-duration: 27s; animation-delay: 5s; opacity: 0.09;"></div>
+        <div class="bubble-layer" aria-hidden="true">
+            <div class="bubble" style="left: 6%; width: 28px; height: 28px; animation-duration: 14s; animation-delay: 0s;"></div>
+            <div class="bubble" style="left: 14%; width: 18px; height: 18px; animation-duration: 18s; animation-delay: 2s;"></div>
+            <div class="bubble" style="left: 24%; width: 42px; height: 42px; animation-duration: 12s; animation-delay: 0.5s;"></div>
+            <div class="bubble" style="left: 34%; width: 22px; height: 22px; animation-duration: 16s; animation-delay: 4s;"></div>
+            <div class="bubble" style="left: 44%; width: 34px; height: 34px; animation-duration: 13s; animation-delay: 1s;"></div>
+            <div class="bubble" style="left: 52%; width: 20px; height: 20px; animation-duration: 17s; animation-delay: 3s;"></div>
+            <div class="bubble" style="left: 60%; width: 52px; height: 52px; animation-duration: 11s; animation-delay: 0.2s;"></div>
+            <div class="bubble" style="left: 68%; width: 24px; height: 24px; animation-duration: 15s; animation-delay: 5s;"></div>
+            <div class="bubble" style="left: 76%; width: 38px; height: 38px; animation-duration: 14s; animation-delay: 1.5s;"></div>
+            <div class="bubble" style="left: 84%; width: 26px; height: 26px; animation-duration: 16s; animation-delay: 6s;"></div>
+            <div class="bubble" style="left: 91%; width: 16px; height: 16px; animation-duration: 19s; animation-delay: 2.5s;"></div>
         </div>
 
-        <div class="text-center px-6 relative z-10 flex-1 flex flex-col justify-center max-w-4xl mx-auto">
+        <div class="text-center px-6 relative z-20 flex-1 flex flex-col justify-center max-w-4xl mx-auto">
             <div class="hero-logo-ring">
                 <img src="images/logo.jpg" alt="" class="w-12 h-12 rounded-full object-cover">
             </div>
@@ -339,7 +358,7 @@
             </div>
         </div>
 
-        <div class="quote-bar relative z-10 shrink-0 mt-8">
+        <div class="quote-bar relative z-20 shrink-0 mt-8">
             <div class="quote-track" aria-hidden="true">
                 <span class="quote-item"><span class="quote-dot"></span>Healthcare is a right, not a privilege.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Every woman deserves access to screening and prevention.</span>
