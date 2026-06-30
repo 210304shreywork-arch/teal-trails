@@ -7,16 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
 
         :root {
             --bg: #0a1110;
             --accent: #5DD3B8;
+            --accent-soft: #7ee8d8;
             --teal: #14b8a6;
             --teal-dark: #0f766e;
-            --text: #EDE8DF;
-            --muted: #C3B8A8;
+            --teal-deep: #0f4c45;
+            --wash: rgba(15, 118, 110, 0.45);
+            --text: #ffffff;
+            --muted: #b8e8df;
+            --muted-warm: #C3B8A8;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
@@ -32,55 +38,177 @@
             letter-spacing: -0.04em;
         }
 
-        .layered-bg {
-            background:
-                radial-gradient(circle at 18% 22%, rgba(15, 118, 110, 0.18) 0%, transparent 55%),
-                radial-gradient(circle at 82% 78%, rgba(93, 211, 184, 0.08) 0%, transparent 60%),
-                var(--bg);
+        /* Faded photo backgrounds — never solid */
+        .faded-bg {
+            position: relative;
+            isolation: isolate;
+        }
+        .faded-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                linear-gradient(160deg, rgba(10, 17, 16, 0.93) 0%, rgba(15, 76, 69, 0.72) 45%, rgba(10, 17, 16, 0.95) 100%),
+                var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        .hero-bg {
+        .hero {
+            position: relative;
+            isolation: isolate;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background-image:
+                linear-gradient(135deg, rgba(10, 17, 16, 0.55) 0%, rgba(15, 118, 110, 0.65) 50%, rgba(10, 17, 16, 0.8) 100%),
+                url('images/school-session-1.jpeg');
+            background-size: cover;
+            background-position: center 30%;
+            filter: saturate(0.35) brightness(0.7);
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
             background:
-                linear-gradient(to bottom, rgba(10, 17, 16, 0.92) 0%, rgba(15, 118, 110, 0.25) 50%, rgba(10, 17, 16, 0.95) 100%),
-                radial-gradient(circle at 30% 40%, rgba(93, 211, 184, 0.12) 0%, transparent 50%),
-                var(--bg);
+                radial-gradient(circle at 20% 30%, rgba(93, 211, 184, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(15, 118, 110, 0.2) 0%, transparent 55%);
+        }
+
+        .float-ring {
+            position: absolute;
+            border: 1px solid rgba(93, 211, 184, 0.25);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float-drift linear infinite;
+        }
+        @keyframes float-drift {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-18px) scale(1.05); opacity: 0.55; }
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(93, 211, 184, 0.15);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
-
         .glass-hover:hover {
             background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(93, 211, 184, 0.3);
+            border-color: rgba(93, 211, 184, 0.35);
             transform: translateY(-4px);
         }
 
         .nav-glass {
-            background: rgba(10, 17, 16, 0.82);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 17, 16, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(93, 211, 184, 0.12);
         }
 
-        .nav-link { position: relative; transition: color 0.2s ease; }
+        .nav-link { position: relative; transition: color 0.2s; }
         .nav-link::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: linear-gradient(to right, var(--accent), var(--teal-dark));
-            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            width: 0; height: 1px;
+            bottom: -3px; left: 0;
+            background: var(--accent);
+            transition: width 0.4s ease;
         }
+        .nav-link:hover { color: var(--accent); }
         .nav-link:hover::after { width: 100%; }
 
-        .premium-shadow { box-shadow: 0 35px 80px -15px rgb(0 0 0 / 0.45); }
+        .premium-shadow { box-shadow: 0 35px 80px -15px rgb(0 0 0 / 0.5); }
+
+        .hero-logo-ring {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(93, 211, 184, 0.4);
+            background: rgba(10, 17, 16, 0.4);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(93, 211, 184, 0.2); }
+            50% { box-shadow: 0 0 0 12px rgba(93, 211, 184, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            line-height: 1;
+            text-transform: uppercase;
+            animation: fade-in-up 1s ease 0.2s both;
+        }
+
+        .hero-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent), transparent);
+            margin: 1.25rem auto;
+            animation: fade-in-up 1s ease 0.4s both;
+        }
+
+        .hero-quote {
+            font-style: italic;
+            color: var(--accent-soft);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            animation: fade-in-up 1s ease 0.5s both;
+        }
+
+        .btn-mission {
+            background: #fff;
+            color: var(--bg);
+            transition: all 0.3s ease;
+        }
+        .btn-mission:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -8px rgba(93, 211, 184, 0.4);
+        }
+        .btn-involved {
+            border: 1.5px solid rgba(93, 211, 184, 0.6);
+            color: var(--accent-soft);
+            background: rgba(10, 17, 16, 0.3);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .btn-involved:hover {
+            background: rgba(93, 211, 184, 0.12);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         .myth-card {
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -91,236 +219,210 @@
         .myth-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
         .myth-back { transform: rotateY(180deg); }
 
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-
         .quote-bar {
-            width: 94%;
-            max-width: 80rem;
-            height: 2.5rem;
-            margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 94%; max-width: 80rem;
+            height: 2.5rem; margin: 0 auto;
+            border: 1px solid rgba(93, 211, 184, 0.15);
             border-bottom: none;
             border-radius: 1rem 1rem 0 0;
-            background: rgba(10, 17, 16, 0.85);
+            background: rgba(10, 17, 16, 0.6);
             backdrop-filter: blur(12px);
             overflow: hidden;
-            display: flex;
-            align-items: center;
+            display: flex; align-items: center;
         }
         .quote-track {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            width: max-content;
-            animation: quote-marquee 45s linear infinite;
+            display: flex; align-items: center;
+            height: 100%; width: max-content;
+            animation: marquee 45s linear infinite;
         }
         .quote-track:hover { animation-play-state: paused; }
         .quote-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0 1.75rem;
-            white-space: nowrap;
-            font-size: 0.75rem;
-            color: var(--muted);
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0 1.75rem; white-space: nowrap;
+            font-size: 0.75rem; color: var(--muted);
             flex-shrink: 0;
         }
         .quote-dot {
             width: 4px; height: 4px;
             border-radius: 50%;
             background: var(--accent);
-            flex-shrink: 0;
         }
-        @keyframes quote-marquee {
+        @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        .work-img { height: 200px; object-fit: cover; width: 100%; }
+        .work-img { height: 210px; width: 100%; object-fit: cover; }
+
         .gallery-item {
             overflow: hidden;
             border-radius: 1rem;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 20px 40px -10px rgba(93, 211, 184, 0.2);
-        }
+        .gallery-item:hover { transform: scale(1.04); }
         .gallery-item img { transition: transform 0.6s ease; }
-        .gallery-item:hover img { transform: scale(1.06); }
-        .gallery-overlay { opacity: 0; transition: opacity 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay { opacity: 0; transition: opacity 0.4s; }
         .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-        .story-img { border-radius: 1.5rem; object-fit: cover; }
+        .story-photo {
+            border-radius: 1.25rem;
+            object-fit: cover;
+            border: 1px solid rgba(93, 211, 184, 0.15);
+        }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 3.25rem !important; letter-spacing: -3px !important; }
+            .faded-bg::before { background-attachment: scroll; }
+            .hero::before { background-attachment: scroll; }
             .quote-bar { width: 92%; height: 2.25rem; }
-            .quote-item { font-size: 0.6875rem; padding: 0 1.25rem; }
-            .work-img { height: 160px; }
+            .work-img { height: 170px; }
         }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-3xl px-4 md:px-8 py-4 md:py-5 premium-shadow">
+    <nav class="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl nav-glass rounded-full px-4 md:px-8 py-3 md:py-4 premium-shadow">
         <div class="grid grid-cols-3 items-center">
-            <div class="hidden lg:flex items-center gap-x-6 text-sm font-medium">
-                <a href="#about" class="nav-link hover:text-[#5DD3B8]">About</a>
-                <a href="#work" class="nav-link hover:text-[#5DD3B8]">Our Work</a>
-                <a href="#impact" class="nav-link hover:text-[#5DD3B8]">Impact</a>
-                <a href="#myths" class="nav-link hover:text-[#5DD3B8]">Myth vs Fact</a>
-                <a href="#story" class="nav-link hover:text-[#5DD3B8]">Our Story</a>
-                <a href="#gallery" class="nav-link hover:text-[#5DD3B8]">Gallery</a>
+            <div class="hidden lg:flex items-center gap-x-6 text-sm font-medium text-white/80">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#work" class="nav-link">Our Work</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="#myths" class="nav-link">Myth vs Fact</a>
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
             </div>
-
             <div class="lg:col-start-2 flex items-center justify-center">
                 <a href="#" class="flex items-center gap-x-3">
-                    <img src="images/logo.jpg" alt="Teal Trails" class="h-11 w-11 rounded-2xl object-cover border border-white/20 flex-shrink-0">
-                    <span class="font-semibold text-2xl md:text-3xl tracking-[-1.5px] hidden sm:inline">Teal Trails</span>
+                    <img src="images/logo.jpg" alt="Teal Trails" class="h-10 w-10 md:h-11 md:w-11 rounded-full object-cover border border-[#5DD3B8]/30">
+                    <span class="font-semibold text-xl md:text-2xl tracking-wide hidden sm:inline text-white">Teal Trails</span>
                 </a>
             </div>
-
-            <div class="flex items-center justify-end gap-x-2 md:gap-x-3">
-                <a href="#get-involved" class="hidden md:block px-5 py-2.5 text-sm font-semibold rounded-3xl border border-white/20 hover:bg-white/5 transition-all">Get Involved</a>
+            <div class="flex items-center justify-end gap-x-2">
+                <a href="#get-involved" class="hidden md:block px-5 py-2 text-sm font-medium rounded-full btn-involved">Get Involved</a>
                 <a href="https://www.instagram.com/teal.trails/" target="_blank" rel="noopener"
-                   class="flex items-center gap-x-2 px-4 md:px-6 py-2.5 md:py-3 rounded-3xl bg-gradient-to-r from-[#f56040] via-[#c13584] to-[#833ab4] text-white text-sm font-semibold">
+                   class="flex items-center gap-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#f56040] via-[#c13584] to-[#833ab4] text-white text-sm font-semibold">
                     <i class="fa-brands fa-instagram"></i>
-                    <span class="hidden sm:inline">Instagram</span>
                 </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="min-h-[100dvh] flex flex-col items-center justify-center relative pt-16 pb-12 hero-bg overflow-hidden">
-        <div class="max-w-5xl mx-auto px-6 text-center flex-1 flex flex-col justify-center relative z-10">
-            <div class="inline-flex items-center gap-x-2 px-5 py-2 rounded-full glass mb-8 text-sm tracking-[2.5px] mx-auto">
-                <div class="w-2 h-2 bg-[#5DD3B8] rounded-full animate-pulse"></div>
-                STUDENT-LED • INDIA
+    <section class="hero pt-20 pb-10">
+        <div class="float-ring" style="width:80px;height:80px;top:18%;left:12%;animation-duration:7s;"></div>
+        <div class="float-ring" style="width:120px;height:120px;top:60%;left:8%;animation-duration:9s;animation-delay:1s;"></div>
+        <div class="float-ring" style="width:60px;height:60px;top:25%;right:15%;animation-duration:6s;animation-delay:2s;"></div>
+        <div class="float-ring" style="width:100px;height:100px;top:70%;right:10%;animation-duration:8s;animation-delay:0.5s;"></div>
+        <div class="float-ring" style="width:40px;height:40px;top:45%;left:45%;animation-duration:5s;"></div>
+
+        <div class="text-center px-6 relative z-10 flex-1 flex flex-col justify-center max-w-4xl mx-auto">
+            <div class="hero-logo-ring">
+                <img src="images/logo.jpg" alt="" class="w-12 h-12 rounded-full object-cover">
             </div>
-            <h1 class="heading-serif hero-title text-[100px] md:text-[130px] leading-[0.9] tracking-[-7px] mb-6">
-                Change starts<br>with <span class="text-[#5DD3B8]">awareness</span>.
-            </h1>
-            <p class="max-w-2xl mx-auto text-xl md:text-2xl text-[#C3B8A8] mb-10">We are students fighting to make women's healthcare accessible in India.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#work" class="px-10 py-5 rounded-3xl bg-[#5DD3B8] text-[#0a1110] font-semibold text-lg hover:bg-white transition-all">Explore Our Work</a>
-                <a href="#get-involved" class="px-10 py-5 rounded-3xl border border-white/20 font-semibold text-lg hover:bg-white/5 transition-all">Get Involved</a>
+            <p class="text-xs md:text-sm tracking-[0.35em] text-[#7ee8d8] uppercase mb-4" style="animation: fade-in-up 1s ease 0.1s both;">Student-Run Non-Profit</p>
+            <h1 class="hero-title text-white">Teal Trails</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-quote mb-4">Change starts with awareness.</p>
+            <p class="text-[#b8e8df]/80 text-sm md:text-base max-w-lg mx-auto mb-10 leading-relaxed" style="animation: fade-in-up 1s ease 0.6s both;">
+                Enhancing access, awareness &amp; understanding of women's healthcare across India.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center" style="animation: fade-in-up 1s ease 0.7s both;">
+                <a href="#about" class="btn-mission px-10 py-4 rounded-full font-semibold text-sm tracking-wide">Our Mission</a>
+                <a href="#get-involved" class="btn-involved px-10 py-4 rounded-full font-semibold text-sm tracking-wide">Get Involved</a>
             </div>
         </div>
 
-        <div class="quote-bar relative z-10 shrink-0">
+        <div class="quote-bar relative z-10 shrink-0 mt-8">
             <div class="quote-track" aria-hidden="true">
                 <span class="quote-item"><span class="quote-dot"></span>Healthcare is a right, not a privilege.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Every woman deserves access to screening and prevention.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Silence around women's health costs lives.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Prevention is power.</span>
-                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives — period.</span>
+                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives.</span>
                 <span class="quote-item"><span class="quote-dot"></span>No woman should die from a preventable cancer.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Healthcare is a right, not a privilege.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Every woman deserves access to screening and prevention.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Silence around women's health costs lives.</span>
                 <span class="quote-item"><span class="quote-dot"></span>Prevention is power.</span>
-                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives — period.</span>
+                <span class="quote-item"><span class="quote-dot"></span>The HPV vaccine saves lives.</span>
                 <span class="quote-item"><span class="quote-dot"></span>No woman should die from a preventable cancer.</span>
             </div>
         </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="max-w-5xl mx-auto px-6 py-24">
-        <div class="grid md:grid-cols-12 gap-x-16">
-            <div class="md:col-span-5">
-                <div class="md:sticky md:top-28 fade-up">
-                    <div class="text-[#5DD3B8] text-sm tracking-[3px] mb-3">WHO WE ARE</div>
-                    <h2 class="heading-serif text-5xl md:text-6xl leading-none tracking-[-2.5px]">Students who believe change begins with one conversation.</h2>
+    <section id="about" class="faded-bg py-24" style="--bg-image: url('images/camp-consultation-1.jpg');">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-x-16 items-start">
+                <div class="md:col-span-5 fade-up">
+                    <div class="md:sticky md:top-28">
+                        <div class="text-[#5DD3B8] text-xs tracking-[0.3em] mb-3 uppercase">Who We Are</div>
+                        <h2 class="heading-serif text-4xl md:text-5xl leading-tight text-white">Students who believe change begins with one conversation.</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="md:col-span-7 text-[#C3B8A8] text-lg leading-relaxed mt-10 md:mt-0 space-y-6 fade-up">
-                <p>Teal Trails is a student-run initiative dedicated to improving access, awareness, and understanding of women's healthcare in India — with a strong focus on cervical cancer prevention and breaking stigma.</p>
-                <p>We believe healthcare should never be a challenge to pursue. It should reach every woman, regardless of where she lives or what she earns.</p>
+                <div class="md:col-span-7 text-[#b8e8df]/90 text-lg leading-relaxed mt-10 md:mt-0 space-y-6 fade-up">
+                    <p>Teal Trails is a student-run initiative dedicated to improving access, awareness, and understanding of women's healthcare in India — with a strong focus on cervical cancer prevention and breaking stigma.</p>
+                    <p>We believe healthcare should never be a challenge to pursue. It should reach every woman, regardless of where she lives or what she earns.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Our Work -->
-    <section id="work" class="layered-bg py-24">
+    <section id="work" class="faded-bg py-24" style="--bg-image: url('images/mobile-health-unit.png');">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14 fade-up">
-                <div class="text-[#5DD3B8] text-sm tracking-[3px] mb-3">WHAT WE DO</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Our Work</h2>
+                <div class="text-[#5DD3B8] text-xs tracking-[0.3em] mb-3 uppercase">What We Do</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Our Work</h2>
             </div>
 
-            <div class="mb-6">
-                <div class="text-[#5DD3B8] text-xs tracking-[3px] mb-4 fade-up">SCHOOL AWARENESS</div>
+            <div class="mb-10 fade-up">
+                <div class="text-[#5DD3B8] text-xs tracking-[0.25em] mb-5 uppercase">School Awareness</div>
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/school-session-1.jpeg" alt="Awareness session with schoolgirls" class="work-img">
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/school-session-1.jpeg" alt="School awareness session" class="work-img">
                         <div class="p-7">
-                            <h3 class="font-semibold text-xl mb-2">School Awareness Campaigns</h3>
-                            <p class="text-[#A89B8A] text-sm leading-relaxed">Interactive sessions educating young girls about cervical cancer, HPV, and the power of early vaccination.</p>
+                            <h3 class="font-semibold text-lg mb-2 text-white">School Awareness Campaigns</h3>
+                            <p class="text-[#b8e8df]/70 text-sm">Interactive sessions educating young girls about cervical cancer, HPV, and early vaccination.</p>
                         </div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/school-ambulance.jpg" alt="Schoolgirls at mobile health ambulance" class="work-img">
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/school-ambulance.jpg" alt="Schoolgirls at health camp" class="work-img">
                         <div class="p-7">
-                            <h3 class="font-semibold text-xl mb-2">HPV Vaccination Drives</h3>
-                            <p class="text-[#A89B8A] text-sm leading-relaxed">Bringing vaccination and health education directly to schools and the communities that need them most.</p>
+                            <h3 class="font-semibold text-lg mb-2 text-white">HPV Vaccination Drives</h3>
+                            <p class="text-[#b8e8df]/70 text-sm">Bringing vaccination and health education directly to schools across India.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div>
-                <div class="text-[#5DD3B8] text-xs tracking-[3px] mb-4 fade-up">MOBILE HEALTH CAMPS</div>
+            <div class="fade-up">
+                <div class="text-[#5DD3B8] text-xs tracking-[0.25em] mb-5 uppercase">Mobile Health Camps</div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
                         <img src="images/mobile-health-unit.png" alt="Teal Trails Mobile Health Unit" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">Mobile Health Unit</h3>
-                            <p class="text-[#A89B8A] text-sm">Our branded ambulance bringing care to rural communities.</p>
-                        </div>
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">Mobile Health Unit</h3><p class="text-[#b8e8df]/70 text-sm">Our branded ambulance bringing care to communities.</p></div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/camp-rural.jpg" alt="Rural health camp outreach" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">Rural Outreach</h3>
-                            <p class="text-[#A89B8A] text-sm">Reaching women in underserved villages across India.</p>
-                        </div>
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/camp-rural.jpg" alt="Rural health camp" class="work-img">
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">Rural Outreach</h3><p class="text-[#b8e8df]/70 text-sm">Reaching women in underserved villages.</p></div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/camp-outdoor.jpg" alt="Outdoor health camp consultation" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">Community Consultations</h3>
-                            <p class="text-[#A89B8A] text-sm">On-ground screening and awareness at local health centres.</p>
-                        </div>
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/camp-outdoor.jpg" alt="Outdoor consultation" class="work-img">
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">Community Consultations</h3><p class="text-[#b8e8df]/70 text-sm">On-ground screening at local health centres.</p></div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/camp-consultation-1.jpg" alt="Patient consultation inside ambulance" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">In-Vehicle Care</h3>
-                            <p class="text-[#A89B8A] text-sm">Private, dignified consultations inside our mobile clinic.</p>
-                        </div>
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/camp-consultation-1.jpg" alt="In-ambulance care" class="work-img">
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">In-Vehicle Care</h3><p class="text-[#b8e8df]/70 text-sm">Private consultations inside our mobile clinic.</p></div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/camp-window.jpg" alt="Doctor at ambulance window" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">Doorstep Healthcare</h3>
-                            <p class="text-[#A89B8A] text-sm">Medical support delivered directly at the community's doorstep.</p>
-                        </div>
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/camp-window.jpg" alt="Doorstep healthcare" class="work-img">
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">Doorstep Healthcare</h3><p class="text-[#b8e8df]/70 text-sm">Medical support at the community's doorstep.</p></div>
                     </div>
-                    <div class="glass glass-hover rounded-3xl overflow-hidden premium-shadow fade-up">
-                        <img src="images/ambulance-open.jpg" alt="Open ambulance health camp" class="work-img">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-lg mb-1">Open-Air Camps</h3>
-                            <p class="text-[#A89B8A] text-sm">Full mobile health camps set up in villages and towns.</p>
-                        </div>
+                    <div class="glass glass-hover rounded-2xl overflow-hidden premium-shadow">
+                        <img src="images/ambulance-open.jpg" alt="Open health camp" class="work-img">
+                        <div class="p-6"><h3 class="font-semibold text-white mb-1">Open-Air Camps</h3><p class="text-[#b8e8df]/70 text-sm">Full mobile camps in villages and towns.</p></div>
                     </div>
                 </div>
             </div>
@@ -328,103 +430,103 @@
     </section>
 
     <!-- Impact -->
-    <section id="impact" class="py-24">
+    <section id="impact" class="faded-bg py-24" style="--bg-image: url('images/camp-rural.jpg');">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-12 fade-up">
-                <div class="text-[#5DD3B8] text-sm tracking-[3px]">THE REALITY</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Why This Matters</h2>
+                <div class="text-[#5DD3B8] text-xs tracking-[0.3em] uppercase mb-3">The Reality</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Why This Matters</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center premium-shadow fade-up">
-                    <div class="text-5xl md:text-6xl font-bold text-[#5DD3B8]">9 min</div>
-                    <div class="mt-2 text-[#A89B8A] text-sm md:text-base">A woman dies every 9 minutes in India from cervical cancer</div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 text-center premium-shadow fade-up">
+                    <div class="text-4xl md:text-5xl font-bold text-[#5DD3B8]">9 min</div>
+                    <div class="mt-2 text-[#b8e8df]/70 text-sm">A woman dies every 9 minutes in India from cervical cancer</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center premium-shadow fade-up">
-                    <div class="text-5xl md:text-6xl font-bold text-[#5DD3B8]">99%</div>
-                    <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Of cases caused by preventable HPV</div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 text-center premium-shadow fade-up">
+                    <div class="text-4xl md:text-5xl font-bold text-[#5DD3B8]">99%</div>
+                    <div class="mt-2 text-[#b8e8df]/70 text-sm">Of cases caused by preventable HPV</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center premium-shadow fade-up">
-                    <div class="text-5xl md:text-6xl font-bold text-[#5DD3B8]">#2</div>
-                    <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Most common cancer in Indian women</div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 text-center premium-shadow fade-up">
+                    <div class="text-4xl md:text-5xl font-bold text-[#5DD3B8]">#2</div>
+                    <div class="mt-2 text-[#b8e8df]/70 text-sm">Most common cancer in Indian women</div>
                 </div>
-                <div class="glass glass-hover rounded-3xl p-6 md:p-8 text-center premium-shadow fade-up">
-                    <div class="text-5xl md:text-6xl font-bold text-[#5DD3B8]">100%</div>
-                    <div class="mt-2 text-[#A89B8A] text-sm md:text-base">Preventable with vaccination &amp; screening</div>
+                <div class="glass glass-hover rounded-2xl p-6 md:p-8 text-center premium-shadow fade-up">
+                    <div class="text-4xl md:text-5xl font-bold text-[#5DD3B8]">100%</div>
+                    <div class="mt-2 text-[#b8e8df]/70 text-sm">Preventable with vaccination &amp; screening</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Myth vs Fact -->
-    <section id="myths" class="layered-bg py-24">
+    <section id="myths" class="faded-bg py-24" style="--bg-image: url('images/ambulance-interior.jpg');">
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-12 fade-up">
-                <div class="text-[#5DD3B8] text-sm tracking-[3px]">KNOWLEDGE IS POWER</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Myth vs Fact</h2>
-                <p class="text-[#A89B8A] mt-2">Tap any card to reveal the truth</p>
+                <div class="text-[#5DD3B8] text-xs tracking-[0.3em] uppercase mb-3">Knowledge Is Power</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Myth vs Fact</h2>
+                <p class="text-[#b8e8df]/60 mt-2 text-sm">Tap any card to reveal the truth</p>
             </div>
             <div class="grid md:grid-cols-2 gap-6" id="myth-grid"></div>
         </div>
     </section>
 
     <!-- Our Story -->
-    <section id="story" class="py-24">
+    <section id="story" class="faded-bg py-24" style="--bg-image: url('images/school-team.jpg');">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14 fade-up">
-                <div class="text-[#5DD3B8] text-sm tracking-[3px] mb-3">OUR STORY</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">From one classroom to a movement.</h2>
+                <div class="text-[#5DD3B8] text-xs tracking-[0.3em] uppercase mb-3">Our Story</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">From one classroom to a movement.</h2>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-10 items-center mb-14 fade-up">
-                <div class="space-y-6 text-[#C3B8A8] text-lg leading-relaxed">
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-12 fade-up">
+                <div class="space-y-6 text-[#b8e8df]/90 text-lg leading-relaxed">
                     <p>Teal Trails began as a student initiative at Oakridge International School. We saw the numbers. We saw the stigma. We decided we would not look away.</p>
                     <p>What started as one student's frustration has grown into a movement of students, doctors, and communities working together to make cervical cancer a disease of the past in India.</p>
                 </div>
-                <div class="glass rounded-3xl p-8 premium-shadow">
-                    <img src="images/founder-banner.png" alt="Teal Trails founder at mobile health camp" class="story-img w-full h-64 mb-6 object-cover">
+                <div class="glass rounded-2xl p-8 premium-shadow">
+                    <img src="images/founder-banner.png" alt="Founder at mobile health camp" class="story-photo w-full h-56 mb-6 object-cover">
                     <div class="flex items-center gap-x-4">
-                        <img src="images/logo.jpg" alt="Teal Trails" class="w-14 h-14 rounded-2xl object-cover border border-white/10">
+                        <img src="images/logo.jpg" alt="" class="w-12 h-12 rounded-full object-cover border border-[#5DD3B8]/30">
                         <div>
-                            <div class="text-xl font-semibold">Vaibhavi Babu</div>
+                            <div class="font-semibold text-white">Vaibhavi Babu</div>
                             <div class="text-[#5DD3B8] text-sm">Founder • Oakridge Gachibowli, DP2</div>
                         </div>
                     </div>
-                    <p class="text-[#C3B8A8] italic mt-5 leading-relaxed">"I created Teal Trails because I couldn't accept that thousands of women in our country die every year from something we can prevent."</p>
+                    <p class="text-[#b8e8df]/80 italic mt-5 text-sm leading-relaxed">"I created Teal Trails because I couldn't accept that thousands of women die every year from something we can prevent."</p>
                 </div>
             </div>
-
             <div class="grid md:grid-cols-2 gap-6 fade-up">
-                <img src="images/school-team.jpg" alt="Teal Trails team with schoolgirls" class="story-img w-full h-72 md:h-80">
-                <img src="images/school-session-1.jpeg" alt="School awareness session in progress" class="story-img w-full h-72 md:h-80">
+                <img src="images/school-team.jpg" alt="Team with schoolgirls" class="story-photo w-full h-72 md:h-80">
+                <img src="images/school-session-1.jpeg" alt="School session" class="story-photo w-full h-72 md:h-80">
             </div>
         </div>
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="layered-bg py-24">
+    <section id="gallery" class="faded-bg py-24" style="--bg-image: url('images/team-van.jpeg');">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-12 fade-up">
-                <div class="text-[#5DD3B8] text-sm tracking-[3px] mb-3">IN THE FIELD</div>
-                <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2.5px]">Gallery</h2>
+                <div class="text-[#5DD3B8] text-xs tracking-[0.3em] uppercase mb-3">In The Field</div>
+                <h2 class="heading-serif text-4xl md:text-5xl text-white">Gallery</h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid"></div>
         </div>
     </section>
 
     <!-- Get Involved -->
-    <section id="get-involved" class="max-w-4xl mx-auto px-6 py-24 text-center">
-        <div class="glass rounded-3xl p-10 md:p-14 premium-shadow fade-up">
-            <h2 class="heading-serif text-5xl md:text-6xl tracking-[-2px] mb-4">Be part of the change.</h2>
-            <p class="text-[#A89B8A] text-lg mb-8">Join us in making cervical cancer a disease of the past in India.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://www.instagram.com/teal.trails/" target="_blank" rel="noopener"
-                   class="px-9 py-4 rounded-3xl bg-[#5DD3B8] text-[#0a1110] font-semibold hover:bg-white transition-all">Follow on Instagram</a>
-                <a href="#" class="px-9 py-4 rounded-3xl border border-white/20 font-semibold hover:bg-white/5 transition-all">Partner With Us</a>
+    <section id="get-involved" class="faded-bg py-24" style="--bg-image: url('images/founder-banner.png');">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-up">
+            <div class="glass rounded-2xl p-10 md:p-14 premium-shadow">
+                <h2 class="heading-serif text-4xl md:text-5xl text-white mb-4">Be part of the change.</h2>
+                <p class="text-[#b8e8df]/70 text-lg mb-8">Join us in making cervical cancer a disease of the past in India.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://www.instagram.com/teal.trails/" target="_blank" rel="noopener"
+                       class="btn-mission px-9 py-4 rounded-full font-semibold text-sm">Follow on Instagram</a>
+                    <a href="#" class="btn-involved px-9 py-4 rounded-full font-semibold text-sm">Partner With Us</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="border-t border-white/10 py-8 text-center text-sm text-[#6B6459]">
+    <footer class="py-8 text-center text-sm text-[#5DD3B8]/40 border-t border-[#5DD3B8]/10">
         © Teal Trails 2026 • Made with conviction by students who refuse to stay silent.
     </footer>
 
@@ -449,66 +551,58 @@
         ];
 
         function createMythCards() {
-            const container = document.getElementById('myth-grid');
-            container.innerHTML = '';
-            myths.forEach(item => {
+            const c = document.getElementById('myth-grid');
+            c.innerHTML = '';
+            myths.forEach((item, i) => {
                 const card = document.createElement('div');
-                card.className = 'myth-card glass rounded-3xl h-64 relative premium-shadow fade-up';
+                card.className = 'myth-card glass rounded-2xl h-64 relative premium-shadow fade-up';
+                card.style.transitionDelay = `${i * 100}ms`;
                 card.innerHTML = `
                     <div class="myth-face absolute inset-0 p-8 flex flex-col">
                         <div class="text-red-400 text-xs tracking-widest font-semibold mb-3">MYTH</div>
-                        <p class="text-lg leading-tight">${item.myth}</p>
-                        <div class="mt-auto text-xs text-white/40">Tap to reveal fact</div>
+                        <p class="text-base leading-tight text-white">${item.myth}</p>
+                        <div class="mt-auto text-xs text-white/30">Tap to reveal fact</div>
                     </div>
-                    <div class="myth-face myth-back absolute inset-0 p-8 flex flex-col bg-[#0f766e]/80 rounded-3xl">
+                    <div class="myth-face myth-back absolute inset-0 p-8 flex flex-col bg-[#0f766e]/70 rounded-2xl backdrop-blur-sm">
                         <div class="text-[#5DD3B8] text-xs tracking-widest font-semibold mb-3">FACT</div>
-                        <p class="text-lg leading-tight">${item.fact}</p>
-                        <div class="mt-auto text-xs text-[#5DD3B8]/70">Tap to flip back</div>
-                    </div>
-                `;
+                        <p class="text-base leading-tight text-white">${item.fact}</p>
+                        <div class="mt-auto text-xs text-[#5DD3B8]/60">Tap to flip back</div>
+                    </div>`;
                 card.onclick = () => card.classList.toggle('flipped');
-                container.appendChild(card);
+                c.appendChild(card);
             });
         }
 
         function createGallery() {
-            const grid = document.getElementById('gallery-grid');
-            galleryItems.forEach(item => {
+            const g = document.getElementById('gallery-grid');
+            galleryItems.forEach((item, i) => {
                 const el = document.createElement('div');
                 el.className = 'gallery-item relative aspect-[4/3] fade-up';
+                el.style.transitionDelay = `${i * 80}ms`;
                 el.innerHTML = `
-                    <img src="${item.src}" alt="${item.caption}" class="w-full h-full object-cover rounded-2xl" loading="lazy">
-                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-[#0a1110]/85 to-transparent rounded-2xl flex items-end p-4">
-                        <span class="text-sm font-medium">${item.caption}</span>
-                    </div>
-                `;
-                grid.appendChild(el);
+                    <img src="${item.src}" alt="${item.caption}" class="w-full h-full object-cover rounded-xl" loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-[#0a1110]/90 to-transparent rounded-xl flex items-end p-4">
+                        <span class="text-sm font-medium text-white">${item.caption}</span>
+                    </div>`;
+                g.appendChild(el);
             });
         }
 
-        function initAnimations() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
-                });
-            }, { threshold: 0.15 });
-            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-        }
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
 
-        window.onload = function() {
+        window.onload = () => {
             createMythCards();
             createGallery();
-            initAnimations();
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         };
     </script>
 </body>
