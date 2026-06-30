@@ -266,17 +266,6 @@
 
         .work-img { height: 210px; width: 100%; object-fit: cover; }
 
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 1rem;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .gallery-item:hover { transform: scale(1.04); }
-        .gallery-item img { transition: transform 0.6s ease; }
-        .gallery-item:hover img { transform: scale(1.08); }
-        .gallery-overlay { opacity: 0; transition: opacity 0.4s; }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-
         .story-photo {
             border-radius: 1.25rem;
             object-fit: cover;
@@ -320,7 +309,7 @@
                 <a href="#impact" class="nav-link">Impact</a>
                 <a href="#press" class="nav-link">Press</a>
                 <a href="#story" class="nav-link">Our Story</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
+
             </div>
             <div class="lg:col-start-2 flex items-center justify-center">
                 <a href="#" class="flex items-center gap-x-3">
@@ -574,17 +563,6 @@
         </div>
     </section>
 
-    <!-- Gallery -->
-    <section id="gallery" class="faded-bg py-24" style="--bg-image: url('images/team-van.jpeg');">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-12 fade-up">
-                <div class="text-[#72E8D5] text-xs tracking-[0.3em] uppercase mb-3">In The Field</div>
-                <h2 class="heading-serif text-4xl md:text-5xl text-white">Gallery</h2>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid"></div>
-        </div>
-    </section>
-
     <!-- Get Involved -->
     <section id="get-involved" class="faded-bg py-24" style="--bg-image: url('images/founder-banner.png');">
         <div class="max-w-4xl mx-auto px-6 text-center fade-up">
@@ -627,33 +605,6 @@
     </footer>
 
     <script>
-        const galleryItems = [
-            { src: 'images/school-team.jpg', caption: 'With students at a school visit' },
-            { src: 'images/team-van.jpeg', caption: 'Our team at the mobile health centre' },
-            { src: 'images/school-session-1.jpeg', caption: 'School awareness session' },
-            { src: 'images/school-ambulance.jpg', caption: 'Students at the health camp' },
-            { src: 'images/founder-banner.png', caption: 'Mobile health camp launch' },
-            { src: 'images/camp-consultation-2.jpeg', caption: 'Patient consultation' },
-            { src: 'images/camp-consultation-3.jpeg', caption: 'Community healthcare' },
-            { src: 'images/ambulance-interior.jpg', caption: 'Inside the mobile clinic' },
-            { src: 'images/camp-consultation-1.jpg', caption: 'Youth health consultation' }
-        ];
-
-        function createGallery() {
-            const g = document.getElementById('gallery-grid');
-            galleryItems.forEach((item, i) => {
-                const el = document.createElement('div');
-                el.className = 'gallery-item relative aspect-[4/3] fade-up';
-                el.style.transitionDelay = `${i * 80}ms`;
-                el.innerHTML = `
-                    <img src="${item.src}" alt="${item.caption}" class="w-full h-full object-cover rounded-xl" loading="lazy">
-                    <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-[#0e1f1d]/90 to-transparent rounded-xl flex items-end p-4">
-                        <span class="text-sm font-medium text-white">${item.caption}</span>
-                    </div>`;
-                g.appendChild(el);
-            });
-        }
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.12 });
@@ -666,7 +617,6 @@
         });
 
         window.onload = () => {
-            createGallery();
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         };
     </script>
